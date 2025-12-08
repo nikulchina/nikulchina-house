@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <title>Къща за гости „Ирина Никулчина“</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --nav-height: 70px;
+      --accent: #00bcd4;
+      --bg-dark: rgba(5, 10, 20, 0.85);
+      --text-light: #f8f7f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #bdb5b5;
+      color: var(--text-light);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    main {
+      padding-top: var(--nav-height);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* NAVBAR */
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.25rem;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(14px);
+      z-index: 1000;
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      padding-right: 0.75rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      white-space: nowrap;
+    }
+
+   .icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: transparent;
+
+
+   border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease,
+    border-color 0.2s ease;
+}
+
+.icon-btn svg {
+  width: 30px;
+  height: 30px;
+}
+
+.icon-btn svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: var(--text-light);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+   
+
+    .icon-btn:hover {
+      background: rgba(0, 188, 212, 0.25);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .icon-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Hamburger */
+
+    .hamburger {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.4);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+    .hamburger-inner {
+      position: relative;
+      width: 18px;
+      height: 14px;
+    }
+
+    .hamburger-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--text-light);
+      border-radius: 999px;
+      transition: transform 0.2s ease, top 0.2s ease, opacity 0.2s ease;
+    }
+
+    .hamburger-line:nth-child(1) {
+      top: 0;
+    }
+    .hamburger-line:nth-child(2) {
+      top: 6px;
+    }
+    .hamburger-line:nth-child(3) {
+      top: 12px;
+    }
+
+    .hamburger.open {
+      border-color: var(--accent);
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .hamburger.open .hamburger-line:nth-child(1) {
+      top: 6px;
+      transform: rotate(45deg);
+    }
+    .hamburger.open .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.open .hamburger-line:nth-child(3) {
+      top: 6px;
+      transform: rotate(-45deg);
+    }
+
+    /* Drawer */
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 950;
+    }
+
+    .drawer-backdrop.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+  .drawer {
+  position: fixed;
+  /* ПРЕДИ: top: 0; */
+  top: var(--nav-height);
+
+  right: -200px;
+  width: 140px;
+
+  /* ПРЕДИ: height: 100vh; */
+  height: calc(100vh - var(--nav-height));
+
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: none;
+  padding: 0.5rem 1.5rem; /* вместо padding-top: calc(...) */
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: right 0.25s ease;
+  z-index: 1001;
+  align-items: flex-end;
+}
+
+
+    .drawer.open {
+      right: 0;
+    }
+
+    .drawer a {
+      padding: 0.5rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.8rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+    }
+
+    .drawer a:last-child {
+      border-bottom: none;
+    }
+
+    .drawer a:hover {
+      color: var(--accent);
+    }
+
+    body.drawer-open {
+      overflow: hidden;
+    }
+
+    /* HERO VIDEO */
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 15px);
+      margin-bottom: 15px; /* 15px марджин отдолу */
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .hero-video-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero-video-wrapper video {
+      width: 100%;
+      height: 100%;
+      max-height: calc(100vh - var(--nav-height) - 15px);
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-overlay-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 1.5rem;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.55),
+        rgba(0, 0, 0, 0.1) 40%,
+        transparent 70%
+      );
+    }
+
+    .hero-title {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      max-width: 420px;
+    }
+
+    /* Scroll hint in bottom-right of video */
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 90px;
+      right: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.35);
+      animation: pulse 1.8s infinite ease-out;
+    }
+
+    .scroll-hint svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--text-light);
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: translateY(0);
+        opacity: 0.9;
+      }
+      50% {
+        transform: translateY(4px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 0.9;
+      }
+    }
+
+    /* Sections */
+
+    .section {
+      padding: 3rem 1.25rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section + .section {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .section p {
+      max-width: 700px;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .section-placeholder {
+      opacity: 0.65;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    /* Simple responsiveness */
+
+    @media (max-width: 640px) {
+      .navbar {
+        padding-inline: 0.75rem;
+      }
+      .logo {
+        display: none;
+      }
+      .nav-left {
+        gap: 0.25rem;
+      }
+      .section {
+        padding-inline: 1rem;
+      }
+    }
+
+    /* Естествени цветове при hover за иконите в нав бара */
+
+/* Локация – червен пин тип Google Maps */
+.icon-location:hover svg path {
+  fill: #ea4335;
+  stroke: #ffffff;
+}
+
+/* BG флаг – реални цветове */
+.icon-flag:hover svg rect:nth-child(1) { /* бяла лента */
+  fill: #ffffff;
+}
+.icon-flag:hover svg rect:nth-child(2) { /* зелена лента */
+  fill: #00966e;
+}
+.icon-flag:hover svg rect:nth-child(3) { /* червена лента */
+  fill: #d62612;
+}
+.icon-flag:hover svg rect:nth-child(4) { /* рамка */
+  fill: none;
+  stroke: #ffffff;
+}
+
+/* Facebook – син фон */
+.icon-facebook:hover svg path {
+  fill: #1877f2;
+  stroke: none;
+}
+
+/* Snow-forecast – циан облаче */
+.icon-snow:hover svg path {
+  fill: #00bcd4;
+  stroke: #e0f7fa;
+}
+
+/* Камера – жълт кант */
+.icon-camera:hover svg path,
+.icon-camera:hover svg rect,
+.icon-camera:hover svg circle {
+  stroke: #ffeb3b;
+  fill: none;
+}
+
+/* Телефон – зелена слушалка */
+.icon-phone:hover svg path {
+  stroke: #4caf50;
+}
+
+/* WhatsApp – зелен балон */
+.icon-whatsapp:hover svg path {
+  fill: #25d366;
+  stroke: #e0f7fa;
+}
+
+.icon-flag svg * {
+  stroke: none !important;
+}
+ 
+.reviews-link {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: #5f0b0b;
+  text-decoration: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease;
+}
+
+
+.reviews-link:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+.room-block {
+  margin-bottom: 2rem;
+}
+
+.room-block h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.room-photos {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.room-photos img {
+  flex: 1;
+  max-width: 100%;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+/* На мобилно снимките една под друга */
+@media (max-width: 640px) {
+  .room-photos {
+    flex-direction: column;
+  }
+}
+
+.apt-block {
+  margin-bottom: 2.5rem;
+}
+
+.apt-block h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.apt-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.apt-grid img {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+/* Мобилно – 2 по 2 */
+@media (max-width: 640px) {
+  .apt-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.gal-block {
+  margin-bottom: 2.5rem;
+}
+
+.gal-block h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Грид за 4 снимки */
+.gal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.gal-grid img {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+/* Две снимки хоризонтално */
+.gal-horizontal {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.gal-horizontal img {
+  flex: 1;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+/* Мобилна адаптация */
+@media (max-width: 640px) {
+  .gal-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gal-horizontal {
+    flex-direction: column;
+  }
+}
+
+.contact-btn {
+  min-width: 180px;
+  text-align: center;
+}
+
+
+.contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 6px;
+  color: #201414;
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-btn:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: var(--accent);
+}
+
+.contact-wa svg {
+  width: 22px;
+  height: 22px;
+  fill: #25d366;
+  stroke: #1b2324;
+}
+
+
+.navbar {
+  position: fixed;
+  overflow: visible; /* позволява елементи да излизат навън */
+}/* Променя само текста вътре в секциите */
+.section h2,
+.section h3,
+.section p,
+.section li,
+.section span {
+  color: #383434;   /* избери твой цвят */
+}
+
+/* Пулсиране на бутона за отзиви */
+.reviews-link {
+  animation: reviewsPulse 4s ease-in-out infinite;
+}
+
+@keyframes reviewsPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(255,255,255,0.25);
+  }
+  50% {
+    transform: scale(1.015);
+    box-shadow: 0 0 8px rgba(255,255,255,0.35);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(255,255,255,0.25);
+  }
+}
+
+.price-table {
+  width: 100%;
+  max-width: 600px;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.price-table th,
+.price-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255,255,255,0.25);
+  text-align: center;
+}
+
+.price-table th {
+  background: rgba(255,255,255,0.12);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.price-table td:first-child {
+  text-align: left;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .price-table {
+    font-size: 0.85rem;
+  }
+
+  .price-table th,
+  .price-table td {
+    padding: 0.4rem 0.5rem;
+  }
+}
+
+/* По-тъмен текст вътре в таблицата Цени */
+.price-table th,
+.price-table td {
+  color: #383333;   /* избери цвят – това е тъмно сиво към черно */
+}
+
+/* Офсет за секциите, така че заглавието да не влиза под навбара */
+.section {
+  scroll-margin-top: 90px; /* коригирай при нужда */
+}
+
+.price-includes {
+  margin-top: 1.6rem;
+  text-align: center;
+}
+
+.price-includes p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.price-includes {
+  margin-top: 1.6rem;
+  text-align: center;
+}
+
+.icons-full {
+  width: 100%;
+  max-width: 700px; /* колкото искаш – това е добър размер */
+  display: block;
+  margin: 1rem auto 0;
+}
+
+/* Корекция на снимките на стаите */
+.room-photos img {
+  height: 420px;        /* фиксирана височина – можеш да сложиш 380 / 400 / 450 */
+  object-fit: cover;    /* изрязва излишното и не разтяга изображението */
+  width: 100%;
+  border-radius: 8px;
+}
+
+.about-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.about-text {
+  flex: 1.2;
+}
+
+.about-photo {
+  flex: 1;
+  max-width: 420px;
+}
+
+.about-photo img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.25);
+  object-fit: cover;
+}
+
+/* Мобилен изглед */
+@media (max-width: 768px) {
+  .about-wrapper {
+    flex-direction: column;
+  }
+
+  .about-photo {
+    max-width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+     <a href="#home" class="logo">
+  <img src="nk3.webp" alt="Лого Никулчината Къща" style="height:82px; width:auto; display:block;">
+</a>
+
+
+       
+       <!-- BG флаг (смяна на език) -->
+      <button
+        type="button"
+      class="icon-btn icon-flag"
+        aria-label="Смяна на езика - BG"
+        title="BG"
+      >
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="4" fill="#ffffff" />
+          <rect x="3" y="9" width="18" height="4" fill="#00966e" />
+          <rect x="3" y="13" width="18" height="4" fill="#d62612" />
+        
+        </svg>
+      </button>
+
+    
+
+      <!-- Локация -->
+<a   href="https://www.google.com/maps/place/%D0%98%D1%80%D0%B8%D0%BD%D0%B0+%D0%9D%D0%B8%D0%BA%D1%83%D0%BB%D1%87%D0%B8%D0%BD%D0%B0/@41.8273002,23.480334,572m/data=!3m2!1e3!4b1!4m6!3m5!1s0x14abae9c8627d2af:0xef959e737c280391!8m2!3d41.8272962!4d23.4829089!16s%2Fg%2F11flzffk84?hl=en-GB&entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D"
+  class="icon-btn icon-location"
+  target="_blank"
+  rel="noopener">
+  <svg viewBox="0 0 24 24">
+    <path d="M12 2.5C8.97 2.5 6.5 4.98 6.5 8.02C6.5 11.82 11.04 17.02 11.75 17.81C11.89 17.98 12.11 17.98 12.25 17.81C12.96 17.02 17.5 11.82 17.5 8.02C17.5 4.98 15.03 2.5 12 2.5Z"/>
+    <circle cx="12" cy="8" r="2.6" />
+  </svg>
+</a>
+
+
+<!-- Facebook -->
+<a href="#" class="icon-btn icon-facebook">
+  <svg viewBox="0 0 24 24">
+    <path d="M14.2 4H16V2H13.8C10.9 2 9.5 3.6 9.5 6.2V8H8V10.3H9.5V22H12V10.3H14.1L14.4 8H12V6.3C12 5 12.5 4 14.2 4Z"
+      fill="currentColor" stroke="none"/>
+  </svg>
+</a>
+
+<!-- Snow-forecast -->
+<a href="https://www.snow-forecast.com/resorts/Bansko/6day/bot"
+  class="icon-btn icon-snow"
+  target="_blank"
+  rel="noopener">
+  <svg viewBox="0 0 24 24">
+    <path d="M8.5 17.5H16.5C18.4 17.5 20 15.9 20 14C20 12.2 18.7 10.7 16.9 10.5C16.4 8.3 14.5 6.7 12.3 6.7C10.3 6.7 8.6 7.9 8 9.7C6.3 9.9 5 11.3 5 13C5 15 6.6 17.5 8.5 17.5Z"/>
+  </svg>
+</a>
+
+<!-- Камера -->
+<a  href="https://www.banskoski.com/bg/webcam/bansko"
+  class="icon-btn icon-camera"
+  target="_blank"
+  rel="noopener">
+  <svg viewBox="0 0 24 24">
+    <rect x="4" y="7" width="11" height="9" rx="1.8" ry="1.8"></rect>
+    <circle cx="9.5" cy="11.5" r="2.6"/>
+    <path d="M18 9L20 8V15L18 14Z"/>
+    <path d="M8.5 7L9.6 5.8H12.3L13.4 7"/>
+  </svg>
+</a>
+
+<!-- Телефон -->
+<a href="tel:+359887251493" class="icon-btn icon-phone">
+  <svg viewBox="0 0 24 24">
+    <path d="M8.5 4.5L6.8 5.2C6 5.5 5.5 6.4 5.6 7.3C5.8 9.1 6.6 11.7 8.6 13.7C10.6 15.7 13.2 16.5 15 16.7C15.9 16.8 16.8 16.3 17.1 15.5L17.8 13.8C18.1 13 17.8 12.2 17.1 11.7L15.4 10.5C14.7 10 13.7 10.2 13.2 10.9L12.7 11.6C11.7 11.3 10.8 10.7 10 9.9C9.2 9.1 8.7 8.2 8.4 7.3L9.1 6.8C9.8 6.3 10 5.3 9.5 4.6L8.5 3.1Z"/>
+  </svg>
+</a>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/359887251493" class="icon-btn icon-whatsapp">
+  <svg viewBox="0 0 24 24">
+    <path d="M12 3.2C7.9 3.2 4.6 6.5 4.6 10.6C4.6 12.1 5 13.5 5.9 14.7L4.8 18.6L8.7 17.5C9.8 18.2 10.9 18.5 12.1 18.5H12.2C16.3 18.5 19.6 15.2 19.6 11.1C19.6 7 16.3 3.7 12.2 3.7L12 3.2Z"/>
+    <path d="M10.4 8.2C10.2 7.8 10 7.7 9.6 7.7C9.1 7.7 8.4 7.7 8.1 8.2C7.8 8.7 7.1 9.5 7.1 10.9C7.1 12.4 8.2 13.8 8.4 14.1C8.6 14.4 10.5 16.8 13 17C14.9 17.1 16.1 16.1 16.4 15.7C16.7 15.3 17.1 14.6 17.1 14.1C17.1 13.6 16.8 13.3 16.4 13.2C16 13.1 14.9 12.6 14.5 12.4C14.1 12.3 13.8 12.2 13.5 12.6C13.2 12.9 12.6 13.6 12.3 13.9C12 14.2 11.7 14.2 11.3 14C10.9 13.8 10 13.4 9.3 12.6C8.7 12 8.4 11.4 8.2 11C8 10.6 8.2 10.3 8.4 10.1C8.5 10 8.7 9.7 8.8 9.5C9 9.3 9 9.1 9 8.9C8.9 8.7 10.6 8.5 10.4 8.2Z"/>
+  </svg>
+</a>
+
+    </div>
+
+    <div class="nav-right">
+      <button
+        id="menuToggle"
+        class="hamburger"
+        type="button"
+        aria-label="Меню"
+        aria-expanded="false"
+        aria-controls="mainDrawer"
+      >
+        <span class="hamburger-inner">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Drawer backdrop -->
+  <div id="drawerBackdrop" class="drawer-backdrop"></div>
+
+  <!-- Drawer -->
+  <nav id="mainDrawer" class="drawer" aria-hidden="true">
+    <a href="#about">За нас</a>
+    <a href="#rooms">Стаи</a>
+    <a href="#apartments">Апартаменти</a>
+    <a href="#prices">Цени</a>
+    <a href="#gallery">Галерия</a>
+    <a href="#reviews">Отзиви</a>
+    <a href="#contacts">Контакти</a>
+  </nav>
+
+  <main>
+    <!-- HERO с луупнато видео и 15px марджин отдолу -->
+    <section class="hero" id="home">
+      <div class="hero-video-wrapper">
+        <video
+           src="lhvideo.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+
+        <div class="hero-overlay-content">
+          <h1 class="hero-title">Къща за гости „Ирина Никулчина“</h1>
+          <p class="hero-subtitle">
+            Уютна къща за гости в подножието на Пирин – ски, биатлон,
+            планински преходи и истинска зимна атмосфера.
+          </p>
+        </div>
+
+        <!-- SVG подсказка за скролване в долен десен ъгъл -->
+        <div class="scroll-hint">
+          <svg viewBox="0 0 24 24">
+            <path d="M7 10L12 15L17 10" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИИ (плейсхолдери – попълни със съдържание по желание) -->
+
+   <section id="about" class="section">
+  <h2>За нас</h2>
+
+  <div class="about-wrapper">
+    <div class="about-text">
+      <p>
+<strong>Никулчината къща</strong> предлага настаняване в дома на едно от <strong>българските светила в биатлона – Ирина Никулчина</strong>. Мястото е създадено с характер, топлина и уважение към планината. Тук <strong>уютът</strong> и <strong>чистотата</strong> са водещи, а всяка стая носи собствен почерк и усещане за спокойствие.
+</p>
+
+<p>
+Къщата е <strong>бутикова</strong>, с ограничен брой помещения и специално внимание към детайлите. Отличавана е като <strong>Къща на годината в Банско</strong>, което я нарежда сред най-предпочитаните места за престой в района. Гостите получават <strong>тишина и уединение</strong>,на крачка от <strong>величието на Пирин</strong>планина – идеална за почивка, спорт или развлечения.
+</p>
+
+    </div>
+
+    <div class="about-photo">
+      <img src="facade.webp" alt="Никулчината Къща - фасада">
+    </div>
+  </div>
+</section>
+
+
+    
+    <section id="apartments" class="section">
+  <h2>Апартаменти</h2>
+
+<div class="apt-block">
+  <h3>Апартамент „Конарево“</h3>
+  <div class="apt-grid">
+    <img src="apt-konarevo-1.webp" alt="Апартамент Конарево 1">
+    <img src="apt-konarevo-2.webp" alt="Апартамент Конарево 2">
+    <img src="apt-konarevo-3.webp" alt="Апартамент Конарево 3">
+    <img src="apt-konarevo-4.webp" alt="Апартамент Конарево 4">
+  </div>
+</div>
+
+<div class="apt-block">
+  <h3>Апартамент „Джано“</h3>
+  <div class="apt-grid">
+    <img src="apt-dzhano-1.webp" alt="Апартамент Джано 1">
+    <img src="apt-dzhano-2.webp" alt="Апартамент Джано 2">
+    <img src="apt-dzhano-3.webp" alt="Апартамент Джано 3">
+    <img src="apt-dzhano-4.webp" alt="Апартамент Джано 4">
+  </div>
+</div>
+
+<div class="apt-block">
+  <h3>Апартамент „Даутов“</h3>
+  <div class="apt-grid">
+    <img src="apt-dautov-1.webp" alt="Апартамент Даутов 1">
+    <img src="apt-dautov-2.webp" alt="Апартамент Даутов 2">
+    <img src="apt-dautov-3.webp" alt="Апартамент Даутов 3">
+    <img src="apt-dautov-4.webp" alt="Апартамент Даутов 4">
+  </div>
+</div>
+
+</section>
+
+
+   <section id="rooms" class="section">
+  <h2>Стаи</h2>
+
+  <div class="room-block">
+    <h3>Стая „Тодорка“</h3>
+    <div class="room-photos">
+      <img src="room-todorka-1.webp" alt="Стая Тодорка 1">
+      <img src="room-todorka-2.webp" alt="Стая Тодорка 2">
+    </div>
+  </div>
+
+  <div class="room-block">
+    <h3>Стая „Полежан“</h3>
+    <div class="room-photos">
+      <img src="room-polezhan-1.webp" alt="Стая Полежан 1">
+      <img src="room-polezhan-2.webp" alt="Стая Полежан 2">
+    </div>
+  </div>
+
+  <div class="room-block">
+    <h3>Стая „Кутело“</h3>
+    <div class="room-photos">
+      <img src="room-kutelo-1.webp" alt="Стая Кутело 1">
+      <img src="room-kutelo-2.webp" alt="Стая Кутело 2">
+    </div>
+  </div>
+
+  <div class="room-block">
+    <h3>Стая „Вихрен“</h3>
+    <div class="room-photos">
+      <img src="room-vihren-1.webp" alt="Стая Вихрен 1">
+      <img src="room-vihren-2.webp" alt="Стая Вихрен 2">
+    </div>
+  </div>
+
+  <div class="room-block">
+    <h3>Стая „Куклите“</h3>
+    <div class="room-photos">
+      <img src="room-kuklite-1.webp" alt="Стая Куклите 1">
+      <img src="room-kuklite-2.webp" alt="Стая Куклите 2">
+    </div>
+  </div>
+
+  <div class="room-block">
+    <h3>Стая „Муратов“</h3>
+    <div class="room-photos">
+      <img src="room-muratov-1.webp" alt="Стая Муратов 1">
+      <img src="room-muratov-2.webp" alt="Стая Муратов 2">
+    </div>
+  </div>
+</section>
+
+   
+      <section id="gallery" class="section">
+      <h2>Галерия</h2>
+
+      <div class="gal-block">
+        <h3>Механа</h3>
+        <div class="gal-grid">
+          <img src="mehana-1.webp" alt="Механа 1">
+          <img src="mehana-2.webp" alt="Механа 2">
+          <img src="mehana-3.webp" alt="Механа 3">
+          <img src="mehana-4.webp" alt="Механа 4">
+        </div>
+      </div>
+
+      <div class="gal-block">
+        <h3>Входове</h3>
+        <div class="gal-horizontal">
+          <img src="vhod-1.webp" alt="Парна баня 1">
+          <img src="vhod-2.webp" alt="Парна баня 2">
+        </div>
+      </div>
+
+      <div class="gal-block">
+        <h3>Сауна, Парна баня и Басейн</h3>
+        <div class="gal-grid">
+          <img src="gradina-1.webp" alt="Градина 1">
+          <img src="gradina-2.webp" alt="Градина 2">
+          <img src="gradina-3.webp" alt="Градина 3">
+          <img src="gradina-4.webp" alt="Градина 4">
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews" class="section">
+      <h2>ОТЗИВИ</h2>
+
+      <a 
+        href="https://www.google.com/maps/place/%D0%98%D1%80%D0%B8%D0%BD%D0%B0+%D0%9D%D0%B8%D0%BA%D1%83%D0%BB%D1%87%D0%B8%D0%BD%D0%B0/@41.8272962,23.4829089,572m/data=!3m1!1e3!4m8!3m7!1s0x14abae9c8627d2af:0xef959e737c280391!8m2!3d41.8272962!4d23.4829089!9m1!1b1!16s%2Fg%2F11flzffk84?hl=en-GB&entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D"
+        target="_blank"
+        class="reviews-link"
+      >
+        Вижте отзивите за нас в Google Reviews →
+      </a>
+    </section>
+
+<section id="prices" class="section">
+  <h2>Цени</h2>
+
+  <table class="price-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Стая</th>
+        <th>Апартамент</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Зимен сезон</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+
+      <tr>
+        <td>Летен сезон</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+
+      <tr>
+        <td>Междинни сезони</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="price-includes">
+  <p>В цената са включени:</p>
+
+  <img src="icons.webp" alt="Услуги включени в цената" class="icons-full">
+</div>
+
+
+
+</section>
+
+
+    <section id="attractions" class="section">
+     <h2>Забележителности и активности</h2>
+<p>
+  Районът предлага <strong>богат избор от занимания</strong> през всички сезони.
+</p>
+<p>
+  Зимата е подходяща за <strong>ски</strong>, <strong>сноуборд</strong>, <strong>ски бягане</strong>, <strong>биатлон</strong>
+  и <strong>разходки с шейни</strong>.
+</p>
+<p>
+  През лятото може да се насладите на <strong>конна езда</strong>, <strong>АТВ</strong> маршрути,
+  <strong>планински преходи</strong>, <strong>йога</strong>, <strong>пилатес</strong> и
+  <strong>планинско колоездене</strong> по пътеки с различна трудност.
+</p>
+<p>
+  За тези, които търсят спокойствие, районът предлага <strong>СПА центрове</strong> и
+  <strong>минерални извори</strong>. Можете също да посетите <strong>Фън парк Белица</strong> или
+  <strong>парка на танцуващите мечки</strong>. Можете да разпуснете и на някое от многобройните места за <strong>пикник сред природата</strong>.
+</p>
+
+    </section>
+
+    <section id="contacts" class="section">
+     <h2>Контакти</h2>
+
+<div class="contact-buttons">
+
+  <a 
+  href="https://www.google.com/maps/place/%D0%BA%D0%B2.+%D0%9D%D0%BE%D0%B2%D0%B8%D1%8F+%D0%B3%D1%80%D0%B0%D0%B4,+ul.+%22Angel+Kanchev%22+1,+2770+Bansko/@41.8272152,23.4828228,3a,44.5y,20.36h,94.09t/data=!3m7!1e1!3m5!1sJL5JIHVRXxgXpAAEq8cO8Q!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-4.087103596102423%26panoid%3DJL5JIHVRXxgXpAAEq8cO8Q%26yaw%3D20.35583277561054!7i16384!8i8192!4m6!3m5!1s0x14abae9c62dde42f:0xf1b2b19942d9040!8m2!3d41.8275408!4d23.4827489!16s%2Fg%2F11j8w5crqv?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" 
+  target="_blank" 
+  class="contact-btn"
+>
+  Angel Kanchev 1, Bansko
+</a>
+
+
+  <a 
+    href="tel:+359887251493" 
+    class="contact-btn"
+  >
+    +359 887 251 493
+  </a>
+
+  <a 
+    href="https://wa.me/359887251493"
+    target="_blank"
+    class="contact-btn contact-wa"
+  >
+    <svg viewBox="0 0 24 24">
+      <path d="M12 3.2C7.9 3.2 4.6 6.5 4.6 10.6C4.6 12.1 5 13.5 5.9 14.7L4.8 18.6L8.7 17.5C9.8 18.2 10.9 18.5 12.1 18.5H12.2C16.3 18.5 19.6 15.2 19.6 11.1C19.6 7 16.3 3.7 12.2 3.7L12 3.2Z"/>
+      <path d="M10.4 8.2C10.2 7.8 10 7.7 9.6 7.7C9.1 7.7 8.4 7.7 8.1 8.2C7.8 8.7 7.1 9.5 7.1 10.9C7.1 12.4 8.2 13.8 8.4 14.1C8.6 14.4 10.5 16.8 13 17C14.9 17.1 16.1 16.1 16.4 15.7C16.7 15.3 17.1 14.6 17.1 14.1C17.1 13.6 16.8 13.3 16.4 13.2C16 13.1 14.9 12.6 14.5 12.4C14.1 12.3 13.8 12.2 13.5 12.6C13.2 12.9 12.6 13.6 12.3 13.9C12 14.2 11.7 14.2 11.3 14C10.9 13.8 10 13.4 9.3 12.6C8.7 12 8.4 11.4 8.2 11C8 10.6 8.2 10.3 8.4 10.1C8.5 10 8.7 9.7 8.8 9.5C9 9.3 9 9.1 9 8.9C8.9 8.7 10.6 8.5 10.4 8.2Z"/>
+    </svg>
+  </a>
+
+</div>
+
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const menuToggle = document.getElementById("menuToggle");
+      const drawer = document.getElementById("mainDrawer");
+      const backdrop = document.getElementById("drawerBackdrop");
+
+      function closeDrawer() {
+        drawer.classList.remove("open");
+        backdrop.classList.remove("visible");
+        menuToggle.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        drawer.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("drawer-open");
+      }
+
+      function openDrawer() {
+        drawer.classList.add("open");
+        backdrop.classList.add("visible");
+        menuToggle.classList.add("open");
+        menuToggle.setAttribute("aria-expanded", "true");
+        drawer.setAttribute("aria-hidden", "false");
+        document.body.classList.add("drawer-open");
+      }
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = drawer.classList.contains("open");
+        if (isOpen) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+      });
+
+      backdrop.addEventListener("click", closeDrawer);
+
+      drawer.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          closeDrawer();
+        });
+      });
+    })();
+  </script>
+
+   <footer style="text-align:left; padding:20px 0 10px 0; font-size:18px; opacity:0.7;">
+  <a href="https://webbadoo.com" target="_blank" style="color:#333131; text-decoration:none;">
+    ©2025 Design by Webbadoo
+  </a>
+</footer>
+
+</body>
+</html>
