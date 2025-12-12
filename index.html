@@ -743,6 +743,72 @@
   }
 }
 
+/* base hidden state */
+.img-animate {
+  opacity: 0;
+  transition: transform 0.7s ease, opacity 0.7s ease;
+  will-change: transform, opacity;
+}
+
+/* directions */
+.from-left   { transform: translateX(-60px); }
+.from-right  { transform: translateX(60px); }
+.from-bottom { transform: translateY(60px); }
+
+/* visible */
+.img-animate.show {
+  opacity: 1;
+  transform: translate(0, 0);
+}.from-right {
+  transform: translateX(60px);
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lb-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+.lb-prev,
+.lb-next,
+.lb-close {
+  position: absolute;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 48px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.lb-prev { left: 30px; }
+.lb-next { right: 30px; }
+.lb-close {
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+}
+
+.lb-prev:hover,
+.lb-next:hover,
+.lb-close:hover {
+  opacity: 0.7;
+}
+
   </style>
 </head>
 <body>
@@ -910,7 +976,7 @@
     </div>
 
     <div class="about-photo">
-      <img src="facade.webp" alt="Никулчината Къща - фасада">
+     <img src="facade.webp" alt="Никулчината Къща - фасада" loading="lazy" class="img-animate from-right">
     </div>
   </div>
 </section>
@@ -921,32 +987,32 @@
   <h2>Апартаменти</h2>
 
 <div class="apt-block">
-  <h3>Апартамент „Конарево“</h3>
+  <h3>Апартамент 1</h3>
   <div class="apt-grid">
-    <img src="apt-konarevo-1.webp" alt="Апартамент Конарево 1">
-    <img src="apt-konarevo-2.webp" alt="Апартамент Конарево 2">
-    <img src="apt-konarevo-3.webp" alt="Апартамент Конарево 3">
-    <img src="apt-konarevo-4.webp" alt="Апартамент Конарево 4">
+    <img src="apt-konarevo-1.webp" alt="Апартамент Конарево 1"loading="lazy">
+    <img src="apt-konarevo-2.webp" alt="Апартамент Конарево 2"loading="lazy">
+    <img src="apt-konarevo-3.webp" alt="Апартамент Конарево 3"loading="lazy">
+    <img src="apt-konarevo-4.webp" alt="Апартамент Конарево 4"loading="lazy">
   </div>
 </div>
 
 <div class="apt-block">
-  <h3>Апартамент „Джано“</h3>
+  <h3>Апартамент 2</h3>
   <div class="apt-grid">
-    <img src="apt-dzhano-1.webp" alt="Апартамент Джано 1">
-    <img src="apt-dzhano-2.webp" alt="Апартамент Джано 2">
-    <img src="apt-dzhano-3.webp" alt="Апартамент Джано 3">
-    <img src="apt-dzhano-4.webp" alt="Апартамент Джано 4">
+    <img src="apt-dzhano-1.webp" alt="Апартамент Джано 1"loading="lazy">
+    <img src="apt-dzhano-2.webp" alt="Апартамент Джано 2"loading="lazy">
+    <img src="apt-dzhano-3.webp" alt="Апартамент Джано 3"loading="lazy">
+    <img src="apt-dzhano-4.webp" alt="Апартамент Джано 4"loading="lazy">
   </div>
 </div>
 
 <div class="apt-block">
-  <h3>Апартамент „Даутов“</h3>
+  <h3>Апартамент 3</h3>
   <div class="apt-grid">
-    <img src="apt-dautov-1.webp" alt="Апартамент Даутов 1">
-    <img src="apt-dautov-2.webp" alt="Апартамент Даутов 2">
-    <img src="apt-dautov-3.webp" alt="Апартамент Даутов 3">
-    <img src="apt-dautov-4.webp" alt="Апартамент Даутов 4">
+    <img src="apt-dautov-1.webp" alt="Апартамент Даутов 1"loading="lazy">
+    <img src="apt-dautov-2.webp" alt="Апартамент Даутов 2"loading="lazy">
+    <img src="apt-dautov-3.webp" alt="Апартамент Даутов 3"loading="lazy">
+    <img src="apt-dautov-4.webp" alt="Апартамент Даутов 4"loading="lazy">
   </div>
 </div>
 
@@ -957,50 +1023,50 @@
   <h2>Стаи</h2>
 
   <div class="room-block">
-    <h3>Стая „Тодорка“</h3>
+    <h3>Стая 4</h3>
     <div class="room-photos">
-      <img src="room-todorka-1.webp" alt="Стая Тодорка 1">
-      <img src="room-todorka-2.webp" alt="Стая Тодорка 2">
+      <img src="room-todorka-1.webp" alt="Стая Тодорка 1"loading="lazy">
+      <img src="room-todorka-2.webp" alt="Стая Тодорка 2"loading="lazy">
     </div>
   </div>
 
   <div class="room-block">
-    <h3>Стая „Полежан“</h3>
+    <h3>Стая 5</h3>
     <div class="room-photos">
-      <img src="room-polezhan-1.webp" alt="Стая Полежан 1">
-      <img src="room-polezhan-2.webp" alt="Стая Полежан 2">
+      <img src="room-polezhan-1.webp" alt="Стая Полежан 1"loading="lazy">
+      <img src="room-polezhan-2.webp" alt="Стая Полежан 2"loading="lazy">
     </div>
   </div>
 
   <div class="room-block">
-    <h3>Стая „Кутело“</h3>
+    <h3>Стая 6</h3>
     <div class="room-photos">
-      <img src="room-kutelo-1.webp" alt="Стая Кутело 1">
-      <img src="room-kutelo-2.webp" alt="Стая Кутело 2">
+      <img src="room-kutelo-1.webp" alt="Стая Кутело 1"loading="lazy">
+      <img src="room-kutelo-2.webp" alt="Стая Кутело 2"loading="lazy">
     </div>
   </div>
 
   <div class="room-block">
-    <h3>Стая „Вихрен“</h3>
+    <h3>Стая 7</h3>
     <div class="room-photos">
-      <img src="room-vihren-1.webp" alt="Стая Вихрен 1">
-      <img src="room-vihren-2.webp" alt="Стая Вихрен 2">
+      <img src="room-vihren-1.webp" alt="Стая Вихрен 1"loading="lazy">
+      <img src="room-vihren-2.webp" alt="Стая Вихрен 2"loading="lazy">
     </div>
   </div>
 
   <div class="room-block">
-    <h3>Стая „Куклите“</h3>
+    <h3>Стая 8</h3>
     <div class="room-photos">
-      <img src="room-kuklite-1.webp" alt="Стая Куклите 1">
-      <img src="room-kuklite-2.webp" alt="Стая Куклите 2">
+      <img src="room-kuklite-1.webp" alt="Стая Куклите 1"loading="lazy">
+      <img src="room-kuklite-2.webp" alt="Стая Куклите 2"loading="lazy">
     </div>
   </div>
 
   <div class="room-block">
-    <h3>Стая „Муратов“</h3>
+    <h3>Стая 9</h3>
     <div class="room-photos">
-      <img src="room-muratov-1.webp" alt="Стая Муратов 1">
-      <img src="room-muratov-2.webp" alt="Стая Муратов 2">
+      <img src="room-muratov-1.webp" alt="Стая Муратов 1"loading="lazy">
+      <img src="room-muratov-2.webp" alt="Стая Муратов 2"loading="lazy">
     </div>
   </div>
 </section>
@@ -1012,28 +1078,28 @@
       <div class="gal-block">
         <h3>Механа</h3>
         <div class="gal-grid">
-          <img src="mehana-1.webp" alt="Механа 1">
-          <img src="mehana-2.webp" alt="Механа 2">
-          <img src="mehana-3.webp" alt="Механа 3">
-          <img src="mehana-4.webp" alt="Механа 4">
+          <img src="mehana-1.webp" alt="Механа 1"loading="lazy">
+          <img src="mehana-2.webp" alt="Механа 2"loading="lazy">
+          <img src="mehana-3.webp" alt="Механа 3"loading="lazy">
+          <img src="mehana-4.webp" alt="Механа 4"loading="lazy">
         </div>
       </div>
 
       <div class="gal-block">
         <h3>Входове</h3>
         <div class="gal-horizontal">
-          <img src="vhod-1.webp" alt="Парна баня 1">
-          <img src="vhod-2.webp" alt="Парна баня 2">
+          <img src="vhod-1.webp" alt="Парна баня 1"loading="lazy">
+          <img src="vhod-2.webp" alt="Парна баня 2"loading="lazy">
         </div>
       </div>
 
       <div class="gal-block">
         <h3>Сауна, Парна баня и Басейн</h3>
         <div class="gal-grid">
-          <img src="gradina-1.webp" alt="Градина 1">
-          <img src="gradina-2.webp" alt="Градина 2">
-          <img src="gradina-3.webp" alt="Градина 3">
-          <img src="gradina-4.webp" alt="Градина 4">
+          <img src="gradina-1.webp" alt="Градина 1"loading="lazy">
+          <img src="gradina-2.webp" alt="Градина 2"loading="lazy">
+          <img src="gradina-3.webp" alt="Градина 3"loading="lazy">
+          <img src="gradina-4.webp" alt="Градина 4"loading="lazy">
         </div>
       </div>
     </section>
@@ -1201,6 +1267,100 @@
     ©2025 Design by Webbadoo
   </a>
 </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  /* 2 на ред – лява/дясна */
+  document.querySelectorAll(".room-photos").forEach(block => {
+    const imgs = block.querySelectorAll("img");
+    if (imgs[0]) imgs[0].classList.add("img-animate", "from-left");
+    if (imgs[1]) imgs[1].classList.add("img-animate", "from-right");
+    imgs.forEach(img => observer.observe(img));
+  });
+
+  /* 4 на ред – отдолу, една по една */
+  document.querySelectorAll(".apt-grid img, .gal-grid img").forEach((img, i) => {
+    img.classList.add("img-animate", "from-bottom");
+    img.style.transitionDelay = `${i * 0.12}s`;
+    observer.observe(img);
+  });
+ const aboutImg = document.querySelector(".about-photo img");
+if (aboutImg) {
+  aboutImg.classList.add("img-animate", "from-right");
+  observer.observe(aboutImg);
+}
+const lightbox = document.getElementById("lightbox");
+const lbImg = lightbox.querySelector(".lb-image");
+const btnPrev = lightbox.querySelector(".lb-prev");
+const btnNext = lightbox.querySelector(".lb-next");
+const btnClose = lightbox.querySelector(".lb-close");
+
+const images = Array.from(document.querySelectorAll(
+  ".room-photos img, .apt-grid img, .gal-grid img, .gal-horizontal img, .about-photo img"
+));
+
+let currentIndex = 0;
+
+function openLightbox(index) {
+  currentIndex = index;
+  lbImg.src = images[currentIndex].src;
+  lightbox.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+function showNext() {
+  currentIndex = (currentIndex + 1) % images.length;
+  lbImg.src = images[currentIndex].src;
+}
+
+function showPrev() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  lbImg.src = images[currentIndex].src;
+}
+
+images.forEach((img, i) => {
+  img.style.cursor = "zoom-in";
+  img.addEventListener("click", () => openLightbox(i));
+});
+
+btnNext.addEventListener("click", showNext);
+btnPrev.addEventListener("click", showPrev);
+btnClose.addEventListener("click", closeLightbox);
+
+lightbox.addEventListener("click", e => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener("keydown", e => {
+  if (!lightbox.classList.contains("open")) return;
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowRight") showNext();
+  if (e.key === "ArrowLeft") showPrev();
+});
+
+});
+</script>
+
+<div id="lightbox" class="lightbox">
+  <button class="lb-close">×</button>
+  <button class="lb-prev">‹</button>
+  <img class="lb-image" src="" alt="">
+  <button class="lb-next">›</button>
+</div>
 
 </body>
 </html>
