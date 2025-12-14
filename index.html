@@ -602,7 +602,7 @@
 
 .navbar {
   position: fixed;
-  overflow: visible; /* позволява елементи да излизат навън */
+  overflow: hidden; /* не позволява елементи да излизат навън */
 }/* Променя само текста вътре в секциите */
 .section h2,
 .section h3,
@@ -830,18 +830,20 @@
   fill: #7360f2;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+.contact-map {
+  overflow: hidden;
+}
+
   </style>
 </head>
 <body>
   <!-- Sticky Navbar -->
   <header class="navbar">
     <div class="nav-left">
-     <a href="#home" class="logo">
-  <img src="nk3.webp" alt="Лого Никулчината Къща" style="height:82px; width:auto; display:block;">
-</a>
-
-
-       
+   
        <!-- BG флаг (смяна на език) -->
       <button
         type="button"
